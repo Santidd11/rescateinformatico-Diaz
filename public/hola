@@ -11,8 +11,8 @@ function App() {
   return (
     <div className="App">
       <header className="header">
-      <NavBar 
-        number = "0" />
+      <NavBar
+        />
       </header>
       <ItemListContainer />
     </div>
@@ -20,4 +20,3 @@ function App() {
 }
 
 export default App;
-

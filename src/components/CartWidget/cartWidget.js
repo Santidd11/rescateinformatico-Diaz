@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import cartImg from '../assets/icons/cart-shopping-solid.svg'
 import "./cartWidget.css";
 
-const ShoppingCart = () => {
+const CartWidget = () => {
 
     return (
         <li className="nav-item dropdown">
@@ -15,4 +15,4 @@ const ShoppingCart = () => {
     );
 };
 
-export default ShoppingCart;
+export default CartWidget;
