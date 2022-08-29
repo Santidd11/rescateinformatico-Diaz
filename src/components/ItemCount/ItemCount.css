@@ -1,0 +1,18 @@
+.UserSection {
+	display: flex;
+    justify-content: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+
+/*Botones*/
+.third{
+    margin: 0px 10px 0px 10px;
+}
+
+.counter{
+    margin: 0px;
+    padding: 0px;
+}

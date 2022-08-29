@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
-const CardComponent = ({ img, name, fun }) => {
+const CardComponent = ({ img, name}) => {
     return (
         <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
@@ -21,9 +21,6 @@ const CardComponent = ({ img, name, fun }) => {
             </CardContent>
         </CardActionArea>
         <CardActions>
-            <Button size="small" color="primary" onClick={fun}>
-            Agregar
-            </Button>
         </CardActions>
         </Card>
     );
