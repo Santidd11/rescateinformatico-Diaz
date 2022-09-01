@@ -1,60 +1,35 @@
-import Greeting from '../CardComponent/CardComponent';
+import ItemList from '../ItemList/ItemList';
 import "./ItemListContainer.css"
-import ItemCount from "../ItemCount/ItemCount";
+import React, { useState, useEffect } from 'react';
+import { getFetch } from '../../stock'
+
 
 const ItemListContainer = () => {
-        const onAdd = (quantity)=>{
-                alert(quantity+' Items agregados con exito');
-        }
+
+        const[Items, setItems] = useState([])
+        const[loading, setLoading] = useState(true)
+
+        useEffect(() =>{
+                getFetch
+                .then((respond) => setItems(respond))
+                .catch(err => console.log(err))
+                .finally(() => setLoading(false))
+        }, [])
+
 
         return (
                 <div>
-                        <div id='perifericos' className="UserSection">
-                                <div className='itemBox'>
-                                        <Greeting
-                                                img='https://m.media-amazon.com/images/I/71yGtauB-AL._AC_SY450_.jpg'
-                                                name='Teclado'
-                                        />
-                                        <ItemCount stock={5} initial={1} onAdd={onAdd}/>
+                        {
+                                loading
+                                ?
+                                <h1 className='cargando'>CARGANDO...</h1>
+                                :
+                                <div id='perifericos' className="UserSection container">
+                                        <div className='row justify-content-md-center'>
+                                                <ItemList Items = {Items} className="col-6"/>
+                                        </div>
                                 </div>
-                                <div className='itemBox'>
-                                        <Greeting
-                                                img='https://mexx-img-2019.s3.amazonaws.com/mouse-logitech-gamer-rgb-lila_38560_5.jpeg?v187'
-                                                name='Mouse'
-                                        />
-                                        <ItemCount stock={5} initial={1} onAdd={onAdd}/>
-                                </div>
-                                <div className='itemBox'>
-                                        <Greeting
-                                                img='https://www.lg.com/es/images/monitores/MD06025876/gallery/medium03.jpg'
-                                                name='Monitor'
-                                        />
-                                        <ItemCount stock={5} initial={1} onAdd={onAdd}/>
-                                </div>
-                        </div>
-                        <div id='componentes' className="UserSection">
-                                <div className='itemBox'>
-                                        <Greeting
-                                                img='https://m.media-amazon.com/images/I/51OVWRFJxsL._AC_SY580_.jpg'
-                                                name='Motherboard'
-                                        />
-                                        <ItemCount stock={5} initial={1} onAdd={onAdd}/>
-                                </div>
-                                <div className='itemBox'>
-                                        <Greeting
-                                                img='http://www.karlosperu.com/wp-content/uploads/2017/06/Intel-procesador.jpg'
-                                                name='Procesador'
-                                        />
-                                        <ItemCount stock={5} initial={1} onAdd={onAdd}/>
-                                </div>
-                                <div className='itemBox'>
-                                        <Greeting
-                                                img='https://images.fravega.com/f500/02392f4a30189dbbebfd0d9cf5b8de3a.jpg'
-                                                name='Placa de Video'
-                                        />
-                                        <ItemCount stock={5} initial={1} onAdd={onAdd}/>
-                                </div>
-                        </div>
+                        }
                 </div>
         )
 }
