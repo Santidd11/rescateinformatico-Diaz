@@ -2,16 +2,15 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardActionArea} from '@mui/material';
-import ItemCount from "../ItemCount/ItemCount";
+import { Link } from 'react-router-dom';
 import "./item.css";
 
 const Item = ({ data }) => {
+    
 
-    const onAdd = (quantity)=>{
-        alert(quantity+' Items agregados con exito');
-    }
 
     return (
         <Card sx={{ maxWidth: 345 }} className="cardBox">
@@ -30,9 +29,10 @@ const Item = ({ data }) => {
             </Typography>
             </CardContent>
         </CardActionArea>
-        <ItemCount stock={5} initial={1} onAdd={onAdd}/>
+        <Link to={`/detail/${data.id}`} className="link">
+                <Button size="small" >Ver mas</Button>
+            </Link>
         </Card>
-
     );
 }
 

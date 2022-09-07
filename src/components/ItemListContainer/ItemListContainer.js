@@ -1,20 +1,31 @@
 import ItemList from '../ItemList/ItemList';
 import "./ItemListContainer.css"
 import React, { useState, useEffect } from 'react';
-import { getFetch } from '../../stock'
+import { getStock, getStockByCategory } from '../../stock'
+import {useParams} from 'react-router-dom'
 
 
 const ItemListContainer = () => {
 
-        const[Items, setItems] = useState([])
+        const[items, setItems] = useState([])
         const[loading, setLoading] = useState(true)
+        const { categoryId } = useParams()
 
         useEffect(() =>{
-                getFetch
-                .then((respond) => setItems(respond))
-                .catch(err => console.log(err))
-                .finally(() => setLoading(false))
-        }, [])
+
+                if(!categoryId){
+                        getStock().then(items => {
+                                setItems(items)
+                                setLoading(false)
+                        })
+                }
+                else{
+                        getStockByCategory(categoryId).then(items => {
+                                setItems(items)
+                                setLoading(false)
+                        })
+                }
+        }, [categoryId])
 
 
         return (
@@ -24,9 +35,9 @@ const ItemListContainer = () => {
                                 ?
                                 <h1 className='cargando'>CARGANDO...</h1>
                                 :
-                                <div id='perifericos' className="UserSection container">
+                                <div className="UserSection container">
                                         <div className='row justify-content-md-center'>
-                                                <ItemList Items = {Items} className="col-6"/>
+                                                <ItemList Items = {items} className="col-6"/>
                                         </div>
                                 </div>
                         }
