@@ -8,7 +8,7 @@ import { CartContext } from '../../CartContext';
 const ItemDetail = ({ name, img, price, stock, description, id }) => {
 
     const [itemvalue, setItemvalue] = useState([]);
-    const [item, setItem] = useState();
+    const [item, setItem] = useState("");
     const [itemsCart, setItemsCart] = useContext(CartContext);
 
     const onAdd = (quantity)=>{
@@ -18,17 +18,18 @@ const ItemDetail = ({ name, img, price, stock, description, id }) => {
             button: "Aceptar"
         });
         setItem({id: id, name: name, price: price, quantity:quantity, total: (quantity*price)});
-        if(item.id == itemvalue.id){
-            console.log("se repite")
-            itemvalue.quantity += item.quantity
-            itemvalue.total += item.total
-        } else {
-            console.log("no se repite")
-            setItemvalue(item);
+        if (item != ""){
+            if(item.id == itemvalue.id){
+                console.log("se repite")
+                itemvalue.quantity += item.quantity
+                itemvalue.total += item.total
+            } else {
+                console.log("no se repite")
+                setItemvalue(item);
+            }
         }
-        console.log("local")
         console.log(itemvalue)
-        setItemsCart(itemsCart.concat(itemvalue))
+
     }
 
     return (
