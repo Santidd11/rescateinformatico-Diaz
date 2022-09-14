@@ -12,24 +12,21 @@ const ItemDetail = ({ name, img, price, stock, description, id }) => {
     const [itemsCart, setItemsCart] = useContext(CartContext);
 
     const onAdd = (quantity)=>{
+        setItemsCart(itemsCart.concat({id: id, img: img, name: name, price: price, quantity:quantity, total: (quantity*price)}));
         swal({
             title: quantity +" "+ name + ' agregado con exito',
             icon: "success",
             button: "Aceptar"
         });
-        setItem({id: id, name: name, price: price, quantity:quantity, total: (quantity*price)});
-        if (item != ""){
-            if(item.id == itemvalue.id){
-                console.log("se repite")
+        setItem({id: id, img: img, name: name, price: price, quantity:quantity, total: (quantity*price)});
+        if (item !== ""){
+            if(item.id === itemvalue.id){
                 itemvalue.quantity += item.quantity
                 itemvalue.total += item.total
             } else {
-                console.log("no se repite")
                 setItemvalue(item);
             }
         }
-        console.log(itemvalue)
-
     }
 
     return (
@@ -38,7 +35,7 @@ const ItemDetail = ({ name, img, price, stock, description, id }) => {
             <img src={img} alt="" className='img-fluid'/>
             <h1>${price} </h1>
             <h1>{description} </h1>
-            <ItemCount stock={stock} initial={1} onAdd={onAdd} />
+            <ItemCount stock={stock} initial={1} onAdd={onAdd} array={itemvalue} />
         </div>
     )
 }

@@ -1,9 +1,16 @@
 import logo from '../assets/logos/Logo-removebg-preview.png';
+import React, { useState, useContext } from 'react';
 import Cart from '../CartWidget/cartWidget';
 import "./NavBar.css";
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../CartContext';
+
+
 
 const NavBar = ({number}) => {
+
+  const [itemsCart, setItemsCart] = useContext(CartContext);
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom-3">
         <Link to="/">
@@ -29,7 +36,7 @@ const NavBar = ({number}) => {
             <div>
               <Cart />
             </div>
-            <h1 className="nav-item nav-link fs-3 text-success">{number}</h1>
+            <h1 className="nav-item nav-link fs-3 text-success">{itemsCart.length}</h1>
           </div>
         </div>
       </nav>
