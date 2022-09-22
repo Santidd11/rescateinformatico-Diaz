@@ -6,10 +6,6 @@ const List = ({ data }) => {
 
     const [itemsCart, setItemsCart, addToCart, clear, clearItem] = useContext(CartContext);
 
-    const clearCart=()=>{
-        clear()
-    }
-
     const deleteItem=()=>{
         clearItem(data.id)
     }
@@ -30,7 +26,6 @@ const List = ({ data }) => {
                     <button onClick={deleteItem} className="card-link btn btn-danger">Sacar del carrito</button>
                 </div>
             </div>
-            <button onClick={clearCart} className='btn btn-danger'>Vaciar carrito</button>
         </div>
     )
 }

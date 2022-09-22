@@ -13,6 +13,7 @@ const ItemCount = ( {stock, initial, onAdd, array} ) => {
     }
 
     const [counter, setCounter] = useState(initial);
+    const [isEnabled, setIsEnabled] = useState(false);
 
     const plusCart = () => {
         if (counter < stock){
@@ -28,6 +29,7 @@ const ItemCount = ( {stock, initial, onAdd, array} ) => {
         if (counter <= stock){
             onAdd(counter)
             setCounter(initial)
+            setIsEnabled(true)
         }
     };
 
@@ -39,7 +41,8 @@ const ItemCount = ( {stock, initial, onAdd, array} ) => {
                 <button onClick={plusCart} className="btn third">+</button>
             </div>
             <button onClick={addCart} className="btn btn-outline-dark">Agregar al carrito</button>
-            <Link to="/cart" ><button className="btn btn-success terminarBtn" onClick={readyCart} >Terminar Compra</button></Link>
+            {isEnabled ? <Link to="/cart" ><button className="btn btn-success terminarBtn" onClick={readyCart} >Terminar Compra</button></Link> : null}
+            
         </div>
     )
 }

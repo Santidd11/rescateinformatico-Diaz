@@ -1,13 +1,39 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CartContext } from '../../CartContext';
 import List from '../List/List'
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
-    const [itemsCart, setItemsCart] = useContext(CartContext);
+    const [itemsCart, setItemsCart, addToCart, clear, clearItem] = useContext(CartContext);
+
+    const clearCart=()=>{
+        clear()
+    }
+    const mapping = itemsCart.map((prod) => <List key = {prod.id} data = {prod}/>)
 
     return (
-        itemsCart.map((prod) => <List key = {prod.id} data = {prod}/>)
+        
+        <div>
+            {itemsCart.length > 0 ? (
+                        <div><div>{mapping}</div>
+                        <div>
+                        {function() {
+                            let total = 0;
+                        for (let i = 0; i<itemsCart.length; i++){
+                            total = total + itemsCart[i].total
+                        }
+                        return <p>Total a pagar: ${total}</p>
+                        }()
+                        }</div>
+                        <button onClick={clearCart} className="btn btn-danger">Vaciar Carrito</button></div>
+                    ) : (
+                        <div><p>No hay items</p>
+                        <Link to="/" className="nav-item nav-link active fs-3 text-success">
+                        Visitar stock
+                        </Link></div>
+                    )}
+        </div>
     )
 }
 

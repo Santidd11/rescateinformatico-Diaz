@@ -10,6 +10,7 @@ import { CartContext } from '../../CartContext';
 const NavBar = ({number}) => {
 
   const [itemsCart, setItemsCart] = useContext(CartContext);
+  const [isEnabled, setIsEnabled] = useState(false);
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom-3">
@@ -34,9 +35,9 @@ const NavBar = ({number}) => {
               </li>
             </ul>
             <div>
-              <Cart />
+              {itemsCart.length > 0 ? <Cart /> : null}
             </div>
-            <h1 className="nav-item nav-link fs-3 text-success">{itemsCart.length}</h1>
+            {itemsCart.length > 0 ? <h1 className="nav-item nav-link fs-3 text-success">{itemsCart.length}</h1> : null}
           </div>
         </div>
       </nav>
