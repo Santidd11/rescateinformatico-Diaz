@@ -3,6 +3,8 @@ import "./ItemListContainer.css"
 import React, { useState, useEffect } from 'react';
 import { getStock, getStockByCategory } from '../../stock'
 import {useParams} from 'react-router-dom'
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from '../../FireBaseConfig'; 
 
 
 const ItemListContainer = () => {
@@ -10,22 +12,22 @@ const ItemListContainer = () => {
         const[items, setItems] = useState([])
         const[loading, setLoading] = useState(true)
         const { categoryId } = useParams()
+        const getItems = async () => {
+                const q = query(collection(db, 'stock-computadoras'));
+                const docs = [];
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                        docs.push({...doc.data(), id: doc.id})
+                });
+                setItems(docs);
+                setLoading(false);
+        };
 
-        useEffect(() =>{
+        useEffect(() => {
+                getItems();
+        }, [])
 
-                if(!categoryId){
-                        getStock().then(items => {
-                                setItems(items)
-                                setLoading(false)
-                        })
-                }
-                else{
-                        getStockByCategory(categoryId).then(items => {
-                                setItems(items)
-                                setLoading(false)
-                        })
-                }
-        }, [categoryId])
+
 
 
         return (

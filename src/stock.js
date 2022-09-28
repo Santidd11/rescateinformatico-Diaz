@@ -6,7 +6,7 @@ const stock = [
         price: 20000,
         stock: 20,
         category: "perifericos",
-        description: "eclado de 89 teclas diseño de 89 teclas, ahorra espacio con la premisa de preservar las teclas numericas de uso comun. perfecto para la oficina y los juegos. presione fn retroceso para encender el bloq num. la luz del teclado numerico esta encendida y es funcional." 
+        description: "Teclado de 89 teclas diseño de 89 teclas, ahorra espacio con la premisa de preservar las teclas numericas de uso comun. perfecto para la oficina y los juegos. presione fn retroceso para encender el bloq num. la luz del teclado numerico esta encendida y es funcional." 
     },
     {
         id:"1",
