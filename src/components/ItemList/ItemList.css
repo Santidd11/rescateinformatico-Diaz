@@ -4,6 +4,10 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+.CardListContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
 
 .itemBox{
 	background-color: rgb(176, 238, 198);

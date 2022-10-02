@@ -35,7 +35,7 @@ const NavBar = ({number}) => {
               </li>
             </ul>
             <div>
-              {itemsCart.length > 0 ? <Cart /> : null}
+              <Cart />
             </div>
             {itemsCart.length > 0 ? <h1 className="nav-item nav-link fs-3 text-success">{itemsCart.length}</h1> : null}
           </div>

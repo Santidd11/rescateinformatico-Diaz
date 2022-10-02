@@ -1,7 +1,6 @@
 import ItemList from '../ItemList/ItemList';
 import "./ItemListContainer.css"
 import React, { useState, useEffect } from 'react';
-import { getStock, getStockByCategory } from '../../stock'
 import {useParams} from 'react-router-dom'
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../../FireBaseConfig'; 

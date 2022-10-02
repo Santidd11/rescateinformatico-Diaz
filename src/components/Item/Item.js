@@ -29,9 +29,6 @@ const Item = ({ data }) => {
             </Typography>
             </CardContent>
         </CardActionArea>
-        <Link to={`/detail/${data.id}`} className="link">
-                <Button size="small" >Ver mas</Button>
-            </Link>
         </Card>
     );
 }
