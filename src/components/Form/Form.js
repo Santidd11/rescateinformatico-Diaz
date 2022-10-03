@@ -38,8 +38,10 @@ const Form = () => {
     const submitFunction = async (values, resetForm, products, itemsCart) => {
         setProducts({nombre: values.name, direccion: values.adress, email: values.email, productos: itemsCart})
         console.log(products);
-        onSubmit(products);
-        resetForm();
+        if(products !== undefined){
+            onSubmit(products);
+            resetForm();
+        }
     };
 
     return (
