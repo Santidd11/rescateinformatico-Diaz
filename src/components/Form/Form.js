@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import { CartContext } from '../../CartContext';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../../FireBaseConfig';
+import "./Form.css";
 
 
 const Form = () => {
@@ -67,7 +68,7 @@ const Form = () => {
 					isValid,
 					dirty,
 				}) => (
-					<form className='Form' onSubmit={handleSubmit}>
+					<form className='Form container container-fluid' onSubmit={handleSubmit}>
 						<TextField
 							name='name'
 							placeholder='Nombre y apellido'
