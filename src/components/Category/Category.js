@@ -1,16 +1,21 @@
 import ItemList from '../ItemList/ItemList';
-import "./ItemListContainer.css"
+import "./Category.css"
 import React, { useState, useEffect } from 'react';
-import { collection, query, getDocs } from "firebase/firestore";
+import {useParams} from 'react-router-dom'
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../../FireBaseConfig'; 
 
 
-const ItemListContainer = () => {
+const Category = () => {
 
         const[items, setItems] = useState([])
         const[loading, setLoading] = useState(true)
-        const getItems = async () => {
-                const q = query(collection(db, 'stock-computadoras'));
+        const { categoryId } = useParams()
+
+
+        useEffect(() => {
+            const getItems = async () => {
+                const q = query(collection(db, 'stock-computadoras'), where('category', '==', categoryId));
                 const docs = [];
                 const querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
@@ -19,10 +24,8 @@ const ItemListContainer = () => {
                 setItems(docs);
                 setLoading(false);
         };
-
-        useEffect(() => {
-                getItems();
-        }, [])
+        getItems();
+        }, [categoryId])
 
 
 
@@ -44,4 +47,4 @@ const ItemListContainer = () => {
         )
 }
 
-export default ItemListContainer
+export default Category
