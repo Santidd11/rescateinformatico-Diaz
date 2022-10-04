@@ -6,12 +6,12 @@ import { CartContext } from '../../CartContext';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../../FireBaseConfig';
 import "./Form.css";
+import swal from 'sweetalert';
 
 
 const Form = () => {
 
     const [itemsCart, setItemsCart, addToCart, clear, clearItem] = useContext(CartContext);
-    const [products, setProducts] = useState()
 
     const yupValidation = yup
         .object()
@@ -28,26 +28,36 @@ const Form = () => {
         })
         .required();
 
-    	const onSubmit = async (products) => {
-            const docRef = await addDoc(collection(db, 'purchases'), {
-                products,
-            });
-            console.log("listo")
-        };
 
-    const submitFunction = async (values, resetForm, products, itemsCart) => {
-        setProducts({nombre: values.name, direccion: values.adress, email: values.email, productos: itemsCart})
-        console.log(products);
-        if(products !== undefined){
-            onSubmit(products);
-            resetForm();
+        const deleteCart=()=>{
+            clear()
         }
+
+
+        
+    const submitFunction = async (values, resetForm, itemsCart) => {
+        let purchase = {}
+
+        purchase.buyer = values
+        purchase.items = itemsCart
+
+        const docRef = await addDoc(collection(db, 'purchases'), {
+            purchase,
+        });
+        console.log("listo");
+        swal({
+            title: "Compra realizada con exito",
+            icon: "success",
+            button: "Aceptar"
+        });
+        deleteCart();
+        resetForm();
     };
 
     return (
         <Formik 
             initialValues={{ name: '', adress: '', email: '' }} 
-            onSubmit={(values, { resetForm }) => submitFunction(values, resetForm, products, itemsCart)} 
+            onSubmit={(values, { resetForm }) => submitFunction(values, resetForm, itemsCart)} 
             validationSchema={yupValidation}
             validate={(values) =>{
                 let errors = {};
@@ -64,8 +74,8 @@ const Form = () => {
 					values,
 					errors,
 					touched,
-					handleChange,
 					handleBlur,
+                    handleChange,
 					handleSubmit,
 					isValid,
 					dirty,

@@ -32,7 +32,7 @@ const Cart = () => {
                             <Form/>
                         </div>
                     ) : (
-                        <div><p>No hay items</p>
+                        <div><p>No hay items en el carrito</p>
                         <Link to="/" className="nav-item nav-link active fs-3 text-success">
                         Visitar stock
                         </Link></div>

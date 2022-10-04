@@ -1,15 +1,6 @@
-useEffect(() =>{
-
-  if(!categoryId){
-          getStock().then(items => {
-                  setItems(items)
-                  setLoading(false)
-          })
-  }
-  else{
-          getStockByCategory(categoryId).then(items => {
-                  setItems(items)
-                  setLoading(false)
-          })
-  }
-}, [categoryId])
+    	const onSubmit = async (products) => {
+            const docRef = await addDoc(collection(db, 'purchases'), {
+                products,
+            });
+            console.log("listo")
+        };
