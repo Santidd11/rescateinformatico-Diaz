@@ -10,7 +10,7 @@ const ItemList = ( {Items} ) => {
             <div className='row justify-content-md-center'>
                 {Items.map((prod) => {
                     return (
-                        <Link to={`/detail/${prod.id}`} key = {prod.id} style={{ textDecoration: 'none', width: "fit-content", height: "fit-content" }} className='col-6'>
+                        <Link to={`/detail/${prod.id}`} key = {prod.id} style={{ textDecoration: 'none', width: "fit-content", height: "fit-content" }} className='col-6 m-3 p-0'>
                             <Item key = {prod.id} data = {prod} />
                         </Link>
                     );

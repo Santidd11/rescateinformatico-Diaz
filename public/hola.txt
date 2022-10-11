@@ -1,6 +1,15 @@
-    	const onSubmit = async (products) => {
-            const docRef = await addDoc(collection(db, 'purchases'), {
-                products,
-            });
-            console.log("listo")
-        };
+            if(item.id === itemvalue.id){
+                itemvalue.quantity += item.quantity
+                itemvalue.total += item.total
+            } else {
+                setItemvalue(item);
+            }
+
+
+
+
+
+            else {
+                    setItemsCart(itemsCart.concat(array));
+                    console.log("segundo")
+                }

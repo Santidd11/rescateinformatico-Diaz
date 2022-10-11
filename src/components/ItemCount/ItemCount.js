@@ -1,16 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState} from "react";
 import "./ItemCount.css";
 import { Link } from 'react-router-dom';
-import { CartContext } from '../../CartContext';
 
 
-const ItemCount = ( {stock, initial, onAdd, array} ) => {
 
-    const [itemsCart, setItemsCart, addToCart] = useContext(CartContext);
+const ItemCount = ( {stock, initial, onAdd} ) => {
 
-    const readyCart=()=>{
-        addToCart(array)
-    }
 
     const [counter, setCounter] = useState(initial);
     const [isEnabled, setIsEnabled] = useState(false);
@@ -41,7 +36,7 @@ const ItemCount = ( {stock, initial, onAdd, array} ) => {
                 <button onClick={plusCart} className="btn third">+</button>
             </div>
             <button onClick={addCart} className="btn btn-outline-dark">Agregar al carrito</button>
-            {isEnabled ? <Link to="/cart" ><button className="btn btn-success terminarBtn" onClick={readyCart} >Terminar Compra</button></Link> : null}
+            {isEnabled ? <Link to="/cart" ><button className="btn btn-success terminarBtn"  >Terminar Compra</button></Link> : null}
             
         </div>
     )

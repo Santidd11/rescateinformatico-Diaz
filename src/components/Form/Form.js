@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import { Button, TextField } from '@mui/material';
 import * as yup from 'yup';
 import { Formik } from 'formik';
@@ -11,7 +11,7 @@ import swal from 'sweetalert';
 
 const Form = () => {
 
-    const [itemsCart, setItemsCart, addToCart, clear, clearItem] = useContext(CartContext);
+    const [itemsCart, setItemsCart] = useContext(CartContext);
 
     const yupValidation = yup
         .object()
@@ -29,11 +29,6 @@ const Form = () => {
         .required();
 
 
-        const deleteCart=()=>{
-            clear()
-        }
-
-
         
     const submitFunction = async (values, resetForm, itemsCart) => {
         let purchase = {}
@@ -44,13 +39,12 @@ const Form = () => {
         const docRef = await addDoc(collection(db, 'purchases'), {
             purchase,
         });
-        console.log("listo");
         swal({
             title: "Compra realizada con exito",
             icon: "success",
             button: "Aceptar"
         });
-        deleteCart();
+        setItemsCart([]);
         resetForm();
     };
 

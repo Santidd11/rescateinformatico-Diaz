@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import ItemCount from '../ItemCount/ItemCount';
 import "./ItemDetail.css";
 import swal from 'sweetalert';
@@ -7,26 +7,30 @@ import { CartContext } from '../../CartContext';
 
 const ItemDetail = ({ name, img, price, stock, description, id }) => {
 
-    const [itemvalue, setItemvalue] = useState([]);
-    const [item, setItem] = useState("");
     const [itemsCart, setItemsCart] = useContext(CartContext);
 
     const onAdd = (quantity)=>{
-        setItemsCart(itemsCart.concat({id: id, img: img, name: name, price: price, quantity:quantity, total: (quantity*price)}));
+        if (itemsCart.length === 0){
+            setItemsCart(itemsCart.concat({id: id, img: img, name: name, price: price, quantity:quantity, total: (quantity*price)}));
+        }   else{
+            var numero = false
+            for (let i = 0; i < itemsCart.length; i++) {
+                if(id === itemsCart[i].id){
+                    itemsCart[i].quantity += quantity
+                    itemsCart[i].total += (quantity*price)
+                    numero = true;
+                    break
+                }
+            }
+            if(numero === false){
+                setItemsCart(itemsCart.concat({id: id, img: img, name: name, price: price, quantity:quantity, total: (quantity*price)}));
+            }
+        }
         swal({
             title: quantity +" "+ name + ' agregado con exito',
             icon: "success",
             button: "Aceptar"
         });
-        setItem({id: id, img: img, name: name, price: price, quantity:quantity, total: (quantity*price)});
-        if (item !== ""){
-            if(item.id === itemvalue.id){
-                itemvalue.quantity += item.quantity
-                itemvalue.total += item.total
-            } else {
-                setItemvalue(item);
-            }
-        }
     }
 
     return (
@@ -35,9 +39,9 @@ const ItemDetail = ({ name, img, price, stock, description, id }) => {
             <img src={img} alt="" className='img-fluid'/>
             <h1>${price} </h1>
             <h1>{description} </h1>
-            <ItemCount stock={stock} initial={1} onAdd={onAdd} array={itemvalue} />
+            <ItemCount stock={stock} initial={1} onAdd={onAdd} />
         </div>
     )
-}
 
+}
 export default ItemDetail

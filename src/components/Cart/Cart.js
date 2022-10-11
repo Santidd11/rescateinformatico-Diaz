@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import { CartContext } from '../../CartContext';
 import List from '../List/List'
 import { Link } from 'react-router-dom';
@@ -6,10 +6,11 @@ import Form from "../Form/Form"
 
 const Cart = () => {
 
-    const [itemsCart, setItemsCart, addToCart, clear, clearItem] = useContext(CartContext);
+    const [itemsCart, setItemsCart] = useContext(CartContext);
+
 
     const clearCart=()=>{
-        clear()
+        setItemsCart([])
     }
     const mapping = itemsCart.map((prod) => <List key = {prod.id} data = {prod}/>)
 

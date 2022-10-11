@@ -4,10 +4,13 @@ import './List.css'
 
 const List = ({ data }) => {
 
-    const [itemsCart, setItemsCart, addToCart, clear, clearItem] = useContext(CartContext);
+    const [itemsCart, setItemsCart] = useContext(CartContext);
 
-    const deleteItem=()=>{
-        clearItem(data.id)
+
+    const clearItem = ()=>{
+        setItemsCart(itemsCart.filter(function(item){
+            return item.id !== data.id;
+        }))
     }
 
     return (
@@ -23,7 +26,7 @@ const List = ({ data }) => {
                     <li className="list-group-item">Total: ${data.total} </li>
                 </ul>
                 <div className="card-body">
-                    <button onClick={deleteItem} className="card-link btn btn-danger">Sacar del carrito</button>
+                    <button onClick={clearItem} className="card-link btn btn-danger">Sacar del carrito</button>
                 </div>
             </div>
         </div>
