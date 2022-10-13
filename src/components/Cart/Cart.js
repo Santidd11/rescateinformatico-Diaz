@@ -8,7 +8,7 @@ const Cart = () => {
 
     const [itemsCart, setItemsCart] = useContext(CartContext);
 
-
+    
     const clearCart=()=>{
         setItemsCart([])
     }

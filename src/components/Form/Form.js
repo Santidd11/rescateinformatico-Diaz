@@ -3,7 +3,7 @@ import { Button, TextField } from '@mui/material';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import { CartContext } from '../../CartContext';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../FireBaseConfig';
 import "./Form.css";
 import swal from 'sweetalert';
@@ -28,7 +28,16 @@ const Form = () => {
         })
         .required();
 
-
+    const editStock = async (id, stock, quantity) =>{
+        
+        const itemsRef = doc(db, "stock-computadoras", id);
+        console.log(stock);
+        console.log(quantity);
+        console.log(stock -quantity);
+        await updateDoc(itemsRef, {
+            stock: (stock - quantity)
+        });
+    }
         
     const submitFunction = async (values, resetForm, itemsCart) => {
         let purchase = {}
@@ -44,6 +53,10 @@ const Form = () => {
             icon: "success",
             button: "Aceptar"
         });
+        for (var i = 0; i < itemsCart.length; i++) {
+            editStock(itemsCart[i].id, itemsCart[i].stock, itemsCart[i].quantity)
+            console.log("listo "+ i)
+        }
         setItemsCart([]);
         resetForm();
     };

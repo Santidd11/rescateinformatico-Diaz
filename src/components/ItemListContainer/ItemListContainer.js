@@ -18,6 +18,7 @@ const ItemListContainer = () => {
                 });
                 setItems(docs);
                 setLoading(false);
+
         };
 
         useEffect(() => {

@@ -28,16 +28,16 @@ const ItemCount = ( {stock, initial, onAdd} ) => {
         }
     };
 
+
     return (
         <div className="form">
             <div className="UserSection">
                 <button onClick={minusCart} className="btn third">-</button>
-                <p className="counter">{counter}</p>
+                {stock > 0 ? <p className="counter">{counter}</p> : <p className="counter">No hay Stock</p>}
                 <button onClick={plusCart} className="btn third">+</button>
             </div>
-            <button onClick={addCart} className="btn btn-outline-dark">Agregar al carrito</button>
+            {stock > 0 ? <button onClick={addCart} className="btn btn-outline-dark">Agregar al carrito</button> : null}
             {isEnabled ? <Link to="/cart" ><button className="btn btn-success terminarBtn"  >Terminar Compra</button></Link> : null}
-            
         </div>
     )
 }

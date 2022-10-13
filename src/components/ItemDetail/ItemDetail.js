@@ -11,7 +11,7 @@ const ItemDetail = ({ name, img, price, stock, description, id }) => {
 
     const onAdd = (quantity)=>{
         if (itemsCart.length === 0){
-            setItemsCart(itemsCart.concat({id: id, img: img, name: name, price: price, quantity:quantity, total: (quantity*price)}));
+            setItemsCart(itemsCart.concat({id: id, img: img, name: name, price: price, stock: stock, quantity:quantity, total: (quantity*price)}));
         }   else{
             var numero = false
             for (let i = 0; i < itemsCart.length; i++) {
@@ -23,7 +23,7 @@ const ItemDetail = ({ name, img, price, stock, description, id }) => {
                 }
             }
             if(numero === false){
-                setItemsCart(itemsCart.concat({id: id, img: img, name: name, price: price, quantity:quantity, total: (quantity*price)}));
+                setItemsCart(itemsCart.concat({id: id, img: img, name: name, price: price, stock: stock, quantity:quantity, total: (quantity*price)}));
             }
         }
         swal({
