@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 import { Button, TextField } from '@mui/material';
 import * as yup from 'yup';
 import { Formik } from 'formik';
@@ -31,9 +31,6 @@ const Form = () => {
     const editStock = async (id, stock, quantity) =>{
         
         const itemsRef = doc(db, "stock-computadoras", id);
-        console.log(stock);
-        console.log(quantity);
-        console.log(stock -quantity);
         await updateDoc(itemsRef, {
             stock: (stock - quantity)
         });
@@ -50,14 +47,15 @@ const Form = () => {
         });
         swal({
             title: "Compra realizada con exito",
+            text: `ID de su compra: ${docRef.id}`,
             icon: "success",
             button: "Aceptar"
         });
         for (var i = 0; i < itemsCart.length; i++) {
             editStock(itemsCart[i].id, itemsCart[i].stock, itemsCart[i].quantity)
-            console.log("listo "+ i)
         }
         setItemsCart([]);
+        localStorage.clear();
         resetForm();
     };
 

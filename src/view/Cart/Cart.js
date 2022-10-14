@@ -1,8 +1,8 @@
 import React, { useContext} from 'react';
 import { CartContext } from '../../CartContext';
-import List from '../List/List'
+import List from '../../components/List/List'
 import { Link } from 'react-router-dom';
-import Form from "../Form/Form"
+import Form from "../../components/Form/Form"
 
 const Cart = () => {
 
@@ -11,6 +11,7 @@ const Cart = () => {
     
     const clearCart=()=>{
         setItemsCart([])
+        localStorage.clear()
     }
     const mapping = itemsCart.map((prod) => <List key = {prod.id} data = {prod}/>)
 

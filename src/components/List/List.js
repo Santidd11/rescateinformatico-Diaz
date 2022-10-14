@@ -11,6 +11,14 @@ const List = ({ data }) => {
         setItemsCart(itemsCart.filter(function(item){
             return item.id !== data.id;
         }))
+        var item = JSON.parse(localStorage.getItem("carrito"));
+        var newItem = []
+        for (let i = 0; i < item.length; i++) {
+            if (item[i].id === data.id){
+                newItem.push(item[i])
+            }
+        }
+        localStorage.setItem("carrito", JSON.stringify(newItem));
     }
 
     return (

@@ -23,15 +23,27 @@ const NavBar = () => {
         <div className="collapse navbar-collapse navigationBar" id="navbarNavAltMarkup">
           <div className="navbar-nav">
             <ul className='navbar-nav'>
-              <li>
-                <Link to="/category/componentes" className="nav-item nav-link active fs-3 text-success">
-                  Componentes
-                </Link>
-              </li>
-              <li>
-                <Link to="/category/perifericos" className="nav-item nav-link active fs-3 text-success">
-                  Perifericos
-                </Link>
+              <li className="nav-item dropdown">
+                <p className="nav-link dropdown-toggle fs-3 text-success" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Categorías
+                </p>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <Link to="/category/componentes" className="nav-item nav-link active fs-3 text-success">
+                      Componentes
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/category/perifericos" className="nav-item nav-link active fs-3 text-success">
+                      Perifericos
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/category/accesorios" className="nav-item nav-link active fs-3 text-success">
+                      Accesorios
+                    </Link>
+                  </li>
+                </ul>
               </li>
             </ul>
             <div>

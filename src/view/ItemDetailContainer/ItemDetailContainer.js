@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import ItemDetail from '../ItemDetail/ItemDetail'
+import ItemDetail from '../../components/ItemDetail/ItemDetail'
 import { useParams } from 'react-router-dom';
 import { collection, query, where, getDocs, documentId } from "firebase/firestore";
 import { db } from '../../FireBaseConfig'; 
+import "./ItemDetailContainer.css";
 
 const ItemDetailContainer = () => {
 
@@ -38,8 +39,8 @@ const ItemDetailContainer = () => {
                                 ?
                                 <h1 className='cargando'>CARGANDO...</h1>
                                 :
-                                <div className="UserSection container">
-                                        <div className='row justify-content-md-center hola'>
+                                <div>
+                                        <div className='contenedor'>
                                                 <ItemDetail {...items}/>
                                         </div>
                                 </div>

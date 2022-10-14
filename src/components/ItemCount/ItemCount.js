@@ -1,6 +1,7 @@
-import React, { useState} from "react";
+import React, { useState, useContext} from "react";
 import "./ItemCount.css";
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../CartContext';
 
 
 
@@ -9,6 +10,7 @@ const ItemCount = ( {stock, initial, onAdd} ) => {
 
     const [counter, setCounter] = useState(initial);
     const [isEnabled, setIsEnabled] = useState(false);
+    const [itemsCart] = useContext(CartContext);
 
     const plusCart = () => {
         if (counter < stock){
@@ -28,6 +30,10 @@ const ItemCount = ( {stock, initial, onAdd} ) => {
         }
     };
 
+    const local = (array) =>{
+        var item = JSON.stringify(array)
+        localStorage.setItem("carrito", item)
+    }
 
     return (
         <div className="form">
@@ -37,7 +43,7 @@ const ItemCount = ( {stock, initial, onAdd} ) => {
                 <button onClick={plusCart} className="btn third">+</button>
             </div>
             {stock > 0 ? <button onClick={addCart} className="btn btn-outline-dark">Agregar al carrito</button> : null}
-            {isEnabled ? <Link to="/cart" ><button className="btn btn-success terminarBtn"  >Terminar Compra</button></Link> : null}
+            {isEnabled ? <Link to="/cart" ><button className="btn btn-success terminarBtn" onClick={local(itemsCart)} >Terminar Compra</button></Link> : null}
         </div>
     )
 }

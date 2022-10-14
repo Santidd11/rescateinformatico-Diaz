@@ -23,7 +23,7 @@ const Item = ({ data }) => {
                 {data.name}
             </Typography>
             <Typography gutterBottom variant="fs-3" component="div">
-                {data.price}
+                ${data.price}
             </Typography>
             </CardContent>
         </CardActionArea>
