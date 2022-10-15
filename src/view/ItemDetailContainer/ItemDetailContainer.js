@@ -3,6 +3,7 @@ import ItemDetail from '../../components/ItemDetail/ItemDetail'
 import { useParams } from 'react-router-dom';
 import { collection, query, where, getDocs, documentId } from "firebase/firestore";
 import { db } from '../../FireBaseConfig'; 
+import Loader from '../../components/Loader/Loader';
 import "./ItemDetailContainer.css";
 
 const ItemDetailContainer = () => {
@@ -37,7 +38,9 @@ const ItemDetailContainer = () => {
                         {
                                 loading
                                 ?
-                                <h1 className='cargando'>CARGANDO...</h1>
+                                <div className='UserSection'>
+                                        <Loader />
+                                </div>
                                 :
                                 <div>
                                         <div className='contenedor'>

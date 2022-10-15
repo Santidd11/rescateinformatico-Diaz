@@ -4,6 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { collection, query, getDocs } from "firebase/firestore";
 import { db } from '../../FireBaseConfig'; 
 import { CartContext } from '../../CartContext';
+import Loader from '../../components/Loader/Loader';
 
 
 const ItemListContainer = () => {
@@ -47,7 +48,9 @@ const ItemListContainer = () => {
                         {
                                 loading
                                 ?
-                                <h1 className='cargando'>CARGANDO...</h1>
+                                <div className='UserSection'>
+                                        <Loader />
+                                </div>
                                 :
                                 <div className="UserSection container">
                                         <div className='row justify-content-md-center'>

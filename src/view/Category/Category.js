@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import {useParams} from 'react-router-dom'
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../../FireBaseConfig'; 
+import Loader from '../../components/Loader/Loader';
 
 
 const Category = () => {
@@ -14,7 +15,7 @@ const Category = () => {
 
 
         useEffect(() => {
-            const getItems = async () => {
+                const getItems = async () => {
                 const q = query(collection(db, 'stock-computadoras'), where('category', '==', categoryId));
                 const docs = [];
                 const querySnapshot = await getDocs(q);
@@ -35,7 +36,9 @@ const Category = () => {
                         {
                                 loading
                                 ?
-                                <h1 className='cargando'>CARGANDO...</h1>
+                                <div className='UserSection'>
+                                        <Loader />
+                                </div>
                                 :
                                 <div className="UserSection container">
                                         <div className='row justify-content-md-center'>
