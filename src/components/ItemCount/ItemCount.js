@@ -1,17 +1,21 @@
 import React, { useState, useContext} from "react";
+//Style
 import "./ItemCount.css";
+//React-Router-Dom
 import { Link } from 'react-router-dom';
+//Context
 import { CartContext } from '../../CartContext';
 
 
 
 const ItemCount = ( {stock, initial, onAdd} ) => {
 
-
+    //Variables
     const [counter, setCounter] = useState(initial);
     const [isEnabled, setIsEnabled] = useState(false);
     const [itemsCart] = useContext(CartContext);
 
+    //Functions
     const plusCart = () => {
         if (counter < stock){
             setCounter(counter + 1);
@@ -29,11 +33,11 @@ const ItemCount = ( {stock, initial, onAdd} ) => {
             setIsEnabled(true)
         }
     };
-
     const local = (array) =>{
         var item = JSON.stringify(array)
         localStorage.setItem("carrito", item)
     }
+
 
     return (
         <div className="form">

@@ -14,3 +14,7 @@
 .link{
 	text-decoration: none;
 }
+
+.imagen{
+	filter: blur(10px);
+}

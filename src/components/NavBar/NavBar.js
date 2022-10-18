@@ -1,8 +1,13 @@
-import logo from '../assets/logos/Logo-removebg-preview.png';
 import React, { useContext } from 'react';
+//Img
+import logo from '../assets/logos/Logo-removebg-preview.png';
+//Component
 import Cart from '../CartWidget/cartWidget';
+//Style
 import "./NavBar.css";
+//React-Router-Dom
 import { Link } from 'react-router-dom';
+//Context
 import { CartContext } from '../../CartContext';
 
 
@@ -23,8 +28,11 @@ const NavBar = () => {
         <div className="collapse navbar-collapse navigationBar" id="navbarNavAltMarkup">
           <div className="navbar-nav">
             <ul className='navbar-nav'>
-              <li className="nav-item dropdown">
-                <p className="nav-link dropdown-toggle fs-3 text-success" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <Link to="/" className='nav-item nav-link active fs-3 text-success'>
+                <p>Inicio</p>
+              </Link>
+              <li className="nav-item dropdown" /*Dropdown de categorias*/ >
+                <p className="nav-link dropdown-toggle fs-3 text-success mb-0" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Categorías
                 </p>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -45,10 +53,14 @@ const NavBar = () => {
                   </li>
                 </ul>
               </li>
+              <Link to="/sobre-nosotros" className='nav-item nav-link active fs-3 text-success'>
+                <p>Sobre Nosotros</p>
+              </Link>
+              <Link to="/cart" className='nav-item nav-link active fs-3 text-success'>
+                <p>Carrito</p>
+              </Link>
             </ul>
-            <div>
               <Cart />
-            </div>
             {itemsCart.length > 0 ? <h1 className="nav-item nav-link fs-3 text-success">{itemsCart.length}</h1> : null}
           </div>
         </div>

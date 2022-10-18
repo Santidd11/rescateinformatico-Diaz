@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
+//Context
 import { CartContext } from '../../CartContext';
+//Style
 import './List.css'
 
 const List = ({ data }) => {
 
+    //Variables
     const [itemsCart, setItemsCart] = useContext(CartContext);
 
-
+    //Functions
     const clearItem = ()=>{
         setItemsCart(itemsCart.filter(function(item){
             return item.id !== data.id;

@@ -1,22 +1,27 @@
 import React, { useContext} from 'react';
+//Context
 import { CartContext } from '../../CartContext';
+//Component
 import List from '../../components/List/List'
-import { Link } from 'react-router-dom';
 import Form from "../../components/Form/Form"
+//React-Router-Dom
+import { Link } from 'react-router-dom';
+
 
 const Cart = () => {
 
+    //Variables
     const [itemsCart, setItemsCart] = useContext(CartContext);
 
-    
+    //Functions
     const clearCart=()=>{
         setItemsCart([])
         localStorage.clear()
     }
     const mapping = itemsCart.map((prod) => <List key = {prod.id} data = {prod}/>)
 
+
     return (
-        
         <div>
             {itemsCart.length > 0 ? (
                         <div>
@@ -28,7 +33,7 @@ const Cart = () => {
                                 total = total + itemsCart[i].total
                             }
                             return <p>Total a pagar: ${total}</p>
-                            }()
+                            }
                             }</div>
                             <button onClick={clearCart} className="btn btn-danger">Vaciar Carrito</button>
                             <Form/>

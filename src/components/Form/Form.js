@@ -1,18 +1,27 @@
 import React, { useContext } from 'react';
+//Mui
 import { Button, TextField } from '@mui/material';
+//Formik
 import * as yup from 'yup';
 import { Formik } from 'formik';
+//Sweet Alert
+import swal from 'sweetalert';
+//Context
 import { CartContext } from '../../CartContext';
+//Firestore
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../FireBaseConfig';
+//Style
 import "./Form.css";
-import swal from 'sweetalert';
+
 
 
 const Form = () => {
 
+    //Variables
     const [itemsCart, setItemsCart] = useContext(CartContext);
 
+    //Functions
     const yupValidation = yup
         .object()
         .shape({
@@ -29,13 +38,11 @@ const Form = () => {
         .required();
 
     const editStock = async (id, stock, quantity) =>{
-        
         const itemsRef = doc(db, "stock-computadoras", id);
         await updateDoc(itemsRef, {
             stock: (stock - quantity)
         });
     }
-        
     const submitFunction = async (values, resetForm, itemsCart) => {
         let purchase = {}
 
@@ -61,7 +68,7 @@ const Form = () => {
 
     return (
         <Formik 
-            initialValues={{ name: '', adress: '', email: '' }} 
+            initialValues={{ name: '', surname: '', adress: '', tel: '', email: '' }} 
             onSubmit={(values, { resetForm }) => submitFunction(values, resetForm, itemsCart)} 
             validationSchema={yupValidation}
             validate={(values) =>{
@@ -71,6 +78,10 @@ const Form = () => {
                     errors.name = "Por favor ingresa un nombre"
                 } else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)){
                     errors.name = "El nombre solo puede contener letras y espacios"
+                } else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.surname)){
+                    errors.surname = "El apellido solo puede contener letras y espacios"
+                } else if (!/^([0-9])*$/.test(values.tel)){
+                    errors.tel = "El telefono solo puede contener numeros"
                 }
                 return errors
             }}
@@ -98,6 +109,18 @@ const Form = () => {
                             type="text"
 						/>
                         <p style={{ color: "red" }}>{errors.name && touched.name && errors.name}</p>
+                        <TextField
+							name='surname'
+							placeholder='Apellido'
+							variant='outlined'
+							className='TextField'
+							sx={{ mb: 1 }}
+							onChange={handleChange}
+							value={values.surname}
+							onBlur={handleBlur}
+                            type="text"
+						/>
+                        <p style={{ color: "red" }}>{errors.surname && touched.surname && errors.surname}</p>
 						<TextField
 							name='adress'
 							placeholder='Dirección'
@@ -110,6 +133,18 @@ const Form = () => {
                             type="text"
 						/>
                         <p style={{ color: "red" }}>{errors.adress && touched.adress && errors.adress}</p>
+                        <TextField
+							name='tel'
+							placeholder='Telefono'
+							variant='outlined'
+							className='TextField'
+							sx={{ mb: 1 }}
+							onChange={handleChange}
+							value={values.tel}
+							onBlur={handleBlur}
+                            type="text"
+						/>
+                        <p style={{ color: "red" }}>{errors.tel && touched.tel && errors.tel}</p>
 						<TextField
 							name='email'
 							placeholder='email@email.com'

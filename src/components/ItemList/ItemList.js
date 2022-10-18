@@ -1,5 +1,7 @@
 import React from 'react'
+//Style
 import Item from '../Item/Item'
+//React-Router-Dom
 import { Link } from 'react-router-dom';
 
 

@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
+//Component
 import ItemDetail from '../../components/ItemDetail/ItemDetail'
+import Loader from '../../components/Loader/Loader';
+//React-Router-Dom
 import { useParams } from 'react-router-dom';
+//Firebase
 import { collection, query, where, getDocs, documentId } from "firebase/firestore";
 import { db } from '../../FireBaseConfig'; 
-import Loader from '../../components/Loader/Loader';
+//Style
 import "./ItemDetailContainer.css";
 
 const ItemDetailContainer = () => {
 
+        //Variables
         const[items, setItems] = useState([])
         const[loading, setLoading] = useState(true)
         const { id } = useParams();
 
 
-
+        //Functions
         useEffect(() => {
                 const getItems = async () => {
                         const q = query(collection(db, 'stock-computadoras'), where(documentId(), '==', id));

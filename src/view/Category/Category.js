@@ -1,19 +1,24 @@
-import ItemList from '../../components/ItemList/ItemList';
-import "./Category.css"
 import React, { useState, useEffect } from 'react';
+//Components
+import ItemList from '../../components/ItemList/ItemList';
+import Loader from '../../components/Loader/Loader';
+//React-Router-Dom
 import {useParams} from 'react-router-dom'
+//Firebase
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../../FireBaseConfig'; 
-import Loader from '../../components/Loader/Loader';
+//Style
+import "./Category.css"
 
 
 const Category = () => {
 
+        //Variables
         const[items, setItems] = useState([])
         const[loading, setLoading] = useState(true)
         const { categoryId } = useParams()
 
-
+        //Functions
         useEffect(() => {
                 const getItems = async () => {
                 const q = query(collection(db, 'stock-computadoras'), where('category', '==', categoryId));
